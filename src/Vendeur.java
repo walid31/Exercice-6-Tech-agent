@@ -1,14 +1,24 @@
+import java.io.IOException;
+
+import jade.core.AID;
 import jade.core.Agent;
+import jade.lang.acl.ACLMessage;
 
 public class Vendeur extends Agent {
-	float prix;
-	String nom;
+	Produit produit = new Produit();
+	ACLMessage msg;
+	long start,end;
 	protected void setup() {
-		Object[] args = getArguments();
-		if(args != null) {
-			nom = (String)args[0];
-			prix = Float.valueOf((String)(args[1])).floatValue();
-			System.out.println("\nLe vendeur "+getLocalName()+ " vend le produit "+nom+ " au prix "+prix);
-		}Runtime.getRuntime().exit(Vendeur.AP_DELETED);
+	 produit.prix = (float) 1000;
+	 produit.designation = "Clavier";		
+	msg = new ACLMessage(ACLMessage.INFORM);
+	msg.addReceiver(new AID("Cedric",AID.ISLOCALNAME));
+	try {
+		msg.setContentObject(produit);
+		msg.setLanguage("JavaSerialization");
+		send(msg);
+	}catch (IOException e) {e.printStackTrace(); }
+	doDelete();		
+		
 	}
 }
