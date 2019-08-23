@@ -12,7 +12,7 @@ public class Vendeur extends Agent {
 	 produit.prix = (float) 1000;
 	 produit.designation = "Clavier";		
 	msg = new ACLMessage(ACLMessage.INFORM);
-	msg.addReceiver(new AID("Cedric",AID.ISLOCALNAME));
+	msg.addReceiver(new AID("Credic",AID.ISLOCALNAME));
 	try {
 		msg.setContentObject(produit);
 		msg.setLanguage("JavaSerialization");
